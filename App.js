@@ -31,14 +31,14 @@ export default function App() {
 
       <View style={styles.container1}>
         <Text style={styles.titulo}>Infos CEP</Text>
-        {/*<Image style={styles.imagem} source={ require('./assets/imgagemInfosCEP.png')}/>*/}
+        <Image style={styles.imagem} source={require('./imagens/imagemInfosCEP.png')}></Image>
       </View>
 
       <View style={styles.container2}>
         <TextInput style={styles.input} placeholder='Digite o CEP' onChangeText={guardarCEP}/>
 
         <View style={styles.conteinerBOTAO}>
-          <Button color='#87CEEB' title='Procurar Infos' onPress={buscar}></Button>
+          <Button style={styles.btn} title='Procurar Infos' onPress={buscar}></Button>
         </View>
 
       </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: 20,
-    //borderRadius: 30,
+    borderRadius: 30,
     textAlign: 'right',
   },
 
@@ -116,6 +116,12 @@ const styles = StyleSheet.create({
 
   conteinerBOTAO: {
     marginTop: 8,  
+  },
+
+  btn: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 30,
   },
 
   input: {
