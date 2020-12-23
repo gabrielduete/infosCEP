@@ -5,12 +5,6 @@
 # ⏩ Preview
 
 <img src='./imagensReadme/InfosCEPimg1.png'>
-<img src='./imagensReadme/InfosCEPimg2.png'>
-<hr>
-<img src='./imagensReadme/InfosCEPimg3.png'>
-<hr>
-<img src='./imagensReadme/InfosCEPimg4.jpg'>
-
 <hr>
 
 # 📝 Sobre
