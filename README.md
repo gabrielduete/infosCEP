@@ -4,7 +4,7 @@
 
 # ⏩ Preview
 
-<img src='./imagensReadme/InfosCEPimg1.png'>
+<img src='./imagens/InfosCEPimg1.png'>
 <hr>
 
 # 📝 Sobre
