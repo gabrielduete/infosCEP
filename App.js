@@ -19,7 +19,6 @@ export default function App() {
     let url = 'https://cep.awesomeapi.com.br/json/' + cep
     let result = await fetch(url)
     var dados = await result.json()
-    console.log(dados)
     
     if(dados.code == 'invalid'){
       Alert.alert('Erro!','CEP INVALIDO!')
