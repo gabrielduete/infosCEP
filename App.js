@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button, Alert } from 'react-native';
 
 export default function App() {
 
@@ -8,22 +8,32 @@ export default function App() {
   const [cidade, setCidade] = useState('')
   const [ddd, setDDD] = useState('')
   const [bairro, setBairro] = useState('')
-
+  const [estado, setEstado] = useState('')
+  
   const guardarCEP = (value) =>{
     setCep(value)
   }
 
   const buscar = async () => {
+
     let url = 'https://cep.awesomeapi.com.br/json/' + cep
     let result = await fetch(url)
-    let dados = await result.json()
+    var dados = await result.json()
     console.log(dados)
-
+    
+    if(dados.code == 'invalid'){
+      Alert.alert('Erro!','CEP INVALIDO!')
+    }
+    else if (dados.code == 'not_found'){
+      Alert.alert('Erro!','CEP NÃO ENCONTRADO!')
+    }
 
     setEndereco(dados.address_name)
     setCidade(dados.city)
     setDDD(dados.ddd)
     setBairro(dados.district)
+    setEstado(dados.state)
+
   }
 
   return (
@@ -35,20 +45,20 @@ export default function App() {
       </View>
 
       <View style={styles.container2}>
-        <TextInput style={styles.input} placeholder='Digite o CEP' onChangeText={guardarCEP}/>
+        <TextInput style={styles.input} placeholderTextColor='white' placeholder='Digite o CEP' onChangeText={guardarCEP} keyboardType = 'numeric'/>
 
         <View style={styles.conteinerBOTAO}>
-          <Button style={styles.btn} title='Procurar Infos' onPress={buscar}></Button>
+          <Button color= '#9932CC' title='Procurar Infos' onPress={buscar}></Button>
         </View>
 
       </View>
-
 
       <View style={styles.containerTextos}>
         <Text style={styles.textos}>Cidade: {cidade} </Text>
         <Text style={styles.textos}>Rua: {endereco} </Text>
         <Text style={styles.textos}>DDD: {ddd} </Text>
         <Text style={styles.textos}>Bairro: {bairro}</Text>
+        <Text style={styles.textos}>Estado: {estado}</Text>
       </View>
 
       <View style={styles.footer}>
@@ -62,15 +72,15 @@ export default function App() {
 const styles = StyleSheet.create({
 
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFE4E1',
   },
 
   titulo: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#B0C4DE',
+    color: '#4B0082',
     marginTop: 50,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: '#4B0082',
     textShadowOffset: {width: 2, height: 2},
     textShadowRadius: 20,
 
@@ -97,7 +107,7 @@ const styles = StyleSheet.create({
   containerTextos:{
     height: 200,
     width:  260,
-    backgroundColor: '#B0C4DE',
+    backgroundColor: '#4B0082',
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: 20,
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
   textos: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'black',
+    color: 'white',
     textAlign: 'right',
     alignSelf: 'flex-start',
 
@@ -118,19 +128,14 @@ const styles = StyleSheet.create({
     marginTop: 8,  
   },
 
-  btn: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-
   input: {
     width: 200,
-    backgroundColor: '#B0C4DE',
+    backgroundColor: '#4B0082',
     height: 50,
     fontSize: 18,
     textAlign: 'center',
     borderRadius: 30,
+    color: 'white',
   },
 
   footer: {
@@ -140,4 +145,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 140
   },
+
+  textoFooter: {
+    color: '#4B0082'
+  }
 });
